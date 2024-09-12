@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  back-end-1:
+    image: your-api-image
+    container_name: task6-back-end-1
+    ports:
+      - "5251:5252"
+
+  back-end-2:
+    image: your-api-image
+    container_name: task6-back-end-2
+    ports:
+      - "5253:5252"
+
+  proxy:
+    image: nginx:latest
+    container_name: task6-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - back-end-1
+      - back-end-2
+
+  front-end:
+    image: your-front-end-image
+    container_name: task6-front-end
+    ports:
+      - "8080:80"
+    depends_on:
+      - proxy

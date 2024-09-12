@@ -1,0 +1,3 @@
+# task5/proxy/Dockerfile
+FROM nginx:latest
+COPY proxy.conf /etc/nginx/conf.d/default.conf
